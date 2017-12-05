@@ -23,8 +23,8 @@
 # include <stdarg.h>
 # include <stdint.h>
 # include <inttypes.h>
-# define BUFF_SIZE 64vLGR
-# define BUF_SIZE 20
+# define BUFF_SIZE 1
+# define BUF_SIZE 1
 
 typedef struct		s_list
 {

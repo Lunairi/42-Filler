@@ -36,13 +36,26 @@
 typedef	struct	s_filler
 {
 	int			i;
-	int			p;
+	int			track;
 	int			j;
 	char		**map;
-	char		*p_info;
+	char		*piece_info;
 	char		**piece;
-	char		*p_number;
-	char		*m_info;
+	int			player_number;
+	int			map_row;
+	int			map_col;
+	int			piece_row;
+	int			piece_col;
+	int			parse_loop;
 }				t_filler;
+
+/*
+** parse_stdin
+*/
+void			parse_player_number(t_filler *game, int t, char *string);
+void			parse_map_size(t_filler *game, int t, char *string);
+void			parse_map_detail(t_filler *game, char *tmp, char *string);
+void			parse_piece_size(t_filler *game, int t, char *string);
+void			parse_piece_detail(t_filler *game, char *string);
 
 #endif

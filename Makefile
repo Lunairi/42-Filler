@@ -14,7 +14,7 @@
 
 NAME	= mlu.filler
 
-SRC		= main.c 
+SRC		= main.c parse_stdin.c
 OBJ 	= $(addprefix ./objects/, $(SRC:.c=.o))
 CFLAG	= -Wall -Wextra -Werror -g
 IFLAG	= -I libft -I includes -g
