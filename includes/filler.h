@@ -32,6 +32,7 @@
 # include <string.h>
 
 # include "libft.h"
+# include "mlx.h"
 
 typedef	struct	s_filler
 {
@@ -64,6 +65,18 @@ typedef struct	s_coords
 	int			k;
 	int			place;
 }				t_coords;
+
+typedef struct	s_visual
+{
+	char		*map;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	int			*pix;
+	int			bits;
+	int			s_line;
+	int			endian;
+}				t_visual;
 
 /*
 ** parse_stdin

@@ -17,7 +17,9 @@ NAME	= mlu.filler
 SRC		= main.c parse_stdin.c scan_board.c
 OBJ 	= $(addprefix ./objects/, $(SRC:.c=.o))
 CFLAG	= -Wall -Wextra -Werror -g
-IFLAG	= -I libft -I includes -g
+LFLAG	= -L minilibx ./libft/libft.a -lmlx
+FFLAG	= -framework OpenGL -framework AppKit
+IFLAG	= -I minilibx -I libft -I includes -g
 
 .SILENT:
 
@@ -25,12 +27,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft/
-	gcc $(CFLAG) -L libft -lft -I libft -I includes $^ -o $(NAME)
+	gcc $(CFLAG) $(LFLAG) $(FFLAG) -L minilibx libft -lft -lmlx -I libft -I includes $^ -o $(NAME)
 	printf '\033[32m[ ✔ ] %s\n\033[0m' "Created filler player"
 
 sanitize: $(OBJ)
 	make -C libft/
-	gcc -fsanitize=address $(CFLAG) -L libft -lft -I libft -I includes $^ -o $(NAME)
+	gcc -fsanitize=address $(CFLAG) $(LFLAG) $(FFLAG) -L minilibx libft -lft -lmlx -I libft -I includes $^ -o $(NAME)
 	printf '\033[32m[ ✔ ] %s\n\033[0m' "Fsanitize filler player"
 
 ./objects/%.o: ./sources/%.c

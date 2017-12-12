@@ -12,16 +12,26 @@
 
 #include "filler.h"
 
+void	initialize_visualizer(t_visual *visual)
+{
+	visual->mlx = mlx_init();
+	visual->map = mlx_new_window(map->mlx, 1100, 1100, "Kill me please");
+	visual->img = mlx_new_image(map->mlx, 1100, 1100);
+	visual->pix = (int*)mlx_get_data_addr(visual->img,
+		&(visual->bits), &(visual->s_line), &(visual->endian));
+}
+
 int		main(void)
 {
 	char *string;
 	t_filler *game;
 	t_coords *map;
-	int		t;
-	// char *ret;
-	t = 0;
+	t_visual *visual;
+
+	visual = ft_memalloc(sizeof(t_visual));
 	map = ft_memalloc(sizeof(t_coords));
 	game = ft_memalloc(sizeof(t_filler));
+	initialize_visualizer(visual);
 	while (game->track != 4 && get_next_line(0, &string))
 	{
 		// fprintf(stderr, "COCK game->track[%i]\n", game->track);

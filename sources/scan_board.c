@@ -148,3 +148,8 @@ int		check_spot(t_filler *game, t_coords *map)
 	}
 	return (0);
 }
+
+void	visualizer(t_filler *game, t_coords *map, t_visual *visual)
+{
+
+}
