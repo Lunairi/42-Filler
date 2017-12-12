@@ -14,7 +14,7 @@
 
 NAME	= mlu.filler
 
-SRC		= main.c parse_stdin.c
+SRC		= main.c parse_stdin.c scan_board.c
 OBJ 	= $(addprefix ./objects/, $(SRC:.c=.o))
 CFLAG	= -Wall -Wextra -Werror -g
 IFLAG	= -I libft -I includes -g
@@ -34,6 +34,7 @@ sanitize: $(OBJ)
 	printf '\033[32m[ ✔ ] %s\n\033[0m' "Fsanitize filler player"
 
 ./objects/%.o: ./sources/%.c
+	mkdir -p objects
 	gcc $(IFLAG) -c $< -o $@
 
 clean:

@@ -16,12 +16,15 @@ int		main(void)
 {
 	char *string;
 	t_filler *game;
+	t_coords *map;
 	int		t;
 	// char *ret;
 	t = 0;
+	map = ft_memalloc(sizeof(t_coords));
 	game = ft_memalloc(sizeof(t_filler));
-	while (game->track != 3 && get_next_line(0, &string))
+	while (game->track != 4 && get_next_line(0, &string))
 	{
+		// fprintf(stderr, "COCK game->track[%i]\n", game->track);
 		if (ft_strstr(string, "exec"))
 			parse_player_number(game, 0, string);
 		else if (ft_strstr(string, "Plateau"))
@@ -33,11 +36,12 @@ int		main(void)
 			parse_piece_size(game, 0, string);
 		else if (game->track == 2)
 			parse_piece_detail(game, string);
+		if (game->track == 3)
+			check_spot(game, map);
 	}
 	free(string);
+	free(map);
 	free(game);
-	fprintf(stdout, "8 1\n");
-
 	return (0);
 }
 
