@@ -68,7 +68,6 @@ typedef struct	s_coords
 
 typedef struct	s_visual
 {
-	char		*map;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -76,7 +75,23 @@ typedef struct	s_visual
 	int			bits;
 	int			s_line;
 	int			endian;
+	int			x_size;
+	int			y_size;
+	int			init;
+	int			height;
+	int			width;
+	int			y_offset;
+	int			x_offset;
+	int			border;
 }				t_visual;
+
+typedef struct	s_vcord
+{
+	int			x0;
+	int			x1;
+	int			y0;
+	int			y1;
+}				t_vcord;
 
 /*
 ** parse_stdin
@@ -91,5 +106,10 @@ void			parse_piece_detail(t_filler *game, char *string);
 ** scan_board.c
 */
 int				check_spot(t_filler *game, t_coords *map);
+
+/*
+** visual.c
+*/
+void			initialize_visualizer(t_filler *game, t_coords *map, t_visual *visual);
 
 #endif

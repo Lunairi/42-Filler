@@ -12,15 +12,6 @@
 
 #include "filler.h"
 
-void	initialize_visualizer(t_visual *visual)
-{
-	visual->mlx = mlx_init();
-	visual->map = mlx_new_window(map->mlx, 1100, 1100, "Kill me please");
-	visual->img = mlx_new_image(map->mlx, 1100, 1100);
-	visual->pix = (int*)mlx_get_data_addr(visual->img,
-		&(visual->bits), &(visual->s_line), &(visual->endian));
-}
-
 int		main(void)
 {
 	char *string;
@@ -31,10 +22,8 @@ int		main(void)
 	visual = ft_memalloc(sizeof(t_visual));
 	map = ft_memalloc(sizeof(t_coords));
 	game = ft_memalloc(sizeof(t_filler));
-	initialize_visualizer(visual);
 	while (game->track != 4 && get_next_line(0, &string))
 	{
-		// fprintf(stderr, "COCK game->track[%i]\n", game->track);
 		if (ft_strstr(string, "exec"))
 			parse_player_number(game, 0, string);
 		else if (ft_strstr(string, "Plateau"))
@@ -43,7 +32,11 @@ int		main(void)
 			&& (!(ft_strstr(string, "012345"))) && game->track == 1)
 			parse_map_detail(game, 0, string);
 		else if (ft_strstr(string, "Piece"))
+		{
+			initialize_visualizer(game, map, visual);
+			mlx_do_sync(visual->mlx);
 			parse_piece_size(game, 0, string);
+		}
 		else if (game->track == 2)
 			parse_piece_detail(game, string);
 		if (game->track == 3)
@@ -52,6 +45,8 @@ int		main(void)
 	free(string);
 	free(map);
 	free(game);
+	free(visual);
+	sleep(10);
 	return (0);
 }
 
@@ -77,4 +72,4 @@ int		main(void)
 // **....
 // *.....
 
-// ./resources/filler_vm -f ./resources/maps/map00 -p1 ./mlu.filler
+// ./resources/filler_vm -f ./resources/maps/map00 -p1 ./mlu.filler -p2 ./resources/players/

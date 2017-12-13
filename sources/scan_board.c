@@ -45,12 +45,6 @@ void	check_overflow(t_filler *game, t_coords *map)
 	}
 }
 
-/*
-** By the time place_piece is called, you know which spot the map is on due to
-** map->row and map->col, and we know where the piece is based off
-** map->p_row and map->p_col, so we need to check all valid pieces
-*/
-
 int		validate_spot(t_filler *game, t_coords *map)
 {
 	if (game->map[map->row + map->x - map->j][map->col + map->y - map->k] == '.')
@@ -85,6 +79,51 @@ int		fill_bottom_right(t_filler *game, t_coords *map)
 	}
 	return (1);
 }
+
+// void	check_overflow(t_filler *game, t_coords *map)
+// {
+// 	if ((--map->y - map->p_col) < 0)
+// 	{
+// 		map->y = 0 - map->p_col;
+// 		map->x--;
+// 	}
+// }
+
+// int		validate_spot(t_filler *game, t_coords *map)
+// {
+// 	if (game->map[map->row + map->x - map->j][map->col + map->y - map->k] == '.')
+// 		check_overflow(game, map);
+// 	else if (map->place == 0)
+// 	{
+// 		check_overflow(game, map);
+// 		map->place = 1;
+// 	}
+// 	else
+// 		return (0);
+// 	return (1);
+// }
+
+
+// int		fill_top_left(t_filler *game, t_coords *map)
+// {
+// 	set_scan_value(map);
+// 	while((map->p_row - map->x) >= 0)
+// 	{
+// 		if (game->piece[map->p_row + map->x][map->p_col + map->y] == '*')
+// 		{
+// 			if ((map->row + map->x - map->j) < game->map_row)
+// 			{
+// 				if (!(validate_spot(game, map)))
+// 					return (2);
+// 			}
+// 			else
+// 				return (2);
+// 		}
+// 		else
+// 			check_overflow(game, map);
+// 	}
+// 	return (1);
+// }
 
 void	truncate_spots(t_filler *game, t_coords *map)
 {
@@ -126,6 +165,7 @@ void	check_piece(t_filler *game, t_coords *map)
 		map->valid = 0;
 }
 
+
 int		check_spot(t_filler *game, t_coords *map)
 {
 	reset_coords(map);
@@ -147,9 +187,4 @@ int		check_spot(t_filler *game, t_coords *map)
 		}
 	}
 	return (0);
-}
-
-void	visualizer(t_filler *game, t_coords *map, t_visual *visual)
-{
-
 }
