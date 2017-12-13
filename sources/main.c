@@ -12,12 +12,23 @@
 
 #include "filler.h"
 
+void	thread_count_set(t_filler *game, t_coords *map, t_visual *visual, int *size)
+{
+	if (game->map_row < 20)
+		*size = 2;
+	else if (game->map_row < 80)
+		*size = 3;
+	else
+		*size = 10;
+}
+
 int		main(void)
 {
 	char *string;
 	t_filler *game;
 	t_coords *map;
 	t_visual *visual;
+	int	size;
 
 	visual = ft_memalloc(sizeof(t_visual));
 	map = ft_memalloc(sizeof(t_coords));
@@ -33,7 +44,8 @@ int		main(void)
 			parse_map_detail(game, 0, string);
 		else if (ft_strstr(string, "Piece"))
 		{
-			initialize_visualizer(game, map, visual);
+			thread_count_set(game, map, visual, &size);
+			initialize_visualizer(game, map, visual, size);
 			mlx_do_sync(visual->mlx);
 			parse_piece_size(game, 0, string);
 		}

@@ -30,6 +30,7 @@
 # include <time.h>
 # include <errno.h>
 # include <string.h>
+# include <pthread.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -93,6 +94,14 @@ typedef struct	s_vcord
 	int			y1;
 }				t_vcord;
 
+typedef struct	s_thread
+{
+	t_visual	*visual;
+	t_coords	*map;
+	t_filler	*game;
+	int			count;
+}				t_thread;
+
 /*
 ** parse_stdin
 */
@@ -110,6 +119,6 @@ int				check_spot(t_filler *game, t_coords *map);
 /*
 ** visual.c
 */
-void			initialize_visualizer(t_filler *game, t_coords *map, t_visual *visual);
+void			initialize_visualizer(t_filler *game, t_coords *map, t_visual *visual, int size);
 
 #endif
