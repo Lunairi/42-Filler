@@ -12,66 +12,66 @@
 
 #include "filler.h"
 
-int		check_addr(t_visual *visual, t_vcord pt, char p)
+int		color_value(t_visual *visual, t_vcord pt)
 {
-	if (p == 'O' || p == 'X')
-	{
-		if (visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] == 0x303030)
-			return (1);
-		if (visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] == 0)
-			return (1);
-	}
-	if (p == '.')
-		if (visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] == 0)
-			return (1);
-	return (0);
+	if (visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] != 0x303030
+			&& pt.p == 'O')
+		return (0x0062FF);
+	if (visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] != 0x303030
+			&& pt.p == 'X')
+		return (0xCC00FF);
+	return (0xFFFFFF);
 }
 
-void	color_piece(t_visual *visual, int x, int y, char p)
+void	color_piece(t_filler *game, t_coords *map,
+				t_visual *visual, t_vcord pt)
 {
-	t_vcord	pt;
-
-	pt.x0 = x * visual->x_size + visual->border + visual->x_offset;
-	pt.x1 = (x + 1) * visual->x_size - visual->border + visual->x_offset;
-	pt.y0 = y * visual->y_size + visual->border + visual->y_offset;
-	pt.y1 = (y + 1) * visual->y_size - visual->border + visual->y_offset;
+	pt.x0 = pt.x * visual->x_size + visual->border + visual->x_offset;
+	pt.x1 = (pt.x + 1) * visual->x_size - visual->border + visual->x_offset;
+	pt.y0 = pt.y * visual->y_size + visual->border + visual->y_offset;
+	pt.y1 = (pt.y + 1) * visual->y_size - visual->border + visual->y_offset;
+	if (pt.p == 'O')
+		pt.color = color_value(visual, pt);
+	else if (pt.p == 'X')
+		pt.color = color_value(visual, pt);
 	while (pt.x0 < pt.x1)
 	{
-		if ((p == 'O') && check_addr(visual, pt, p))
-			visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] = 0xFF00FF;
-		else if ((p == 'X') && check_addr(visual, pt, p))
-			visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] = 0x099FFF;
-		else if ((p == '.') && check_addr(visual, pt, p))
+		if (pt.p == 'O')
+			visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] = pt.color;
+		else if (pt.p == 'X')
+			visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] = pt.color;
+		if (visual->init == 1)
 			visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] = 0x303030;
 		if (++pt.y0 > pt.y1)
 		{
-			pt.y0 = y * visual->y_size + visual->border + visual->y_offset;
+			pt.y0 = pt.y * visual->y_size + visual->border + visual->y_offset;
 			pt.x0++;
 		}
 	}
 }
 
-void	visualizer(t_filler *game, t_coords *map, t_visual *visual, int i)
+void		visualizer(t_filler *game, t_coords *map, t_visual *visual)
 {
-	int x;
-	int y;
-	int end;
+	t_vcord	pt;
 
-	x = i * 20;
-	end = ((i + 1) * 20);
-	y = 0;
-	while ((x < game->map_row) && (x < end))
+	while (pt.x < game->map_row)
 	{
-			color_piece(visual, x , y, game->map[x][y]);
-			if (++y > game->map_col)
-			{
-				y = 0;
-				x++;
-			}
+		if (game->map[pt.x][pt.y] == 'O' || game->map[pt.x][pt.y] == 'X')
+		{
+			pt.p = game->map[pt.x][pt.y];
+			color_piece(game, map, visual, pt);
+		}
+		if (visual->init == 1 && game->map[pt.x][pt.y] == '.')
+			color_piece(game, map, visual, pt);
+		if (++pt.y > game->map_col)
+		{
+			pt.y = 0;
+			pt.x++;
+		}
 	}
-}	
+}
 
-void	init_map(t_filler *game, t_coords *map, t_visual *visual, int *size)
+void		init_map(t_filler *game, t_coords *map, t_visual *visual)
 {
 	visual->mlx = mlx_init();
 	visual->win = mlx_new_window(visual->mlx, 1000, 1000, "Kill me please");
@@ -88,41 +88,6 @@ void	init_map(t_filler *game, t_coords *map, t_visual *visual, int *size)
 		visual->border = 4;
 	else
 		visual->border = 2;
-}
-
-static void	*threader(void *t)
-{
-	t_thread *image;
-
-	image = (t_thread*)t;
-	visualizer(image->game, image->map, image->visual, image->count);
-	return ((void*)image);
-}
-
-void	initialize_visualizer(t_filler *game, t_coords *map, t_visual *visual, int size)
-{
-	pthread_t tid[size];
-	t_thread	t[size];
-	int i;
-
-	i = -1;
-	if (visual->init++ == 0)
-		init_map(game, map, visual, &size);
-	else
-	{
-		while (++i < size)
-		{
-			t[i].game = game;
-			t[i].map = map;
-			t[i].visual = visual;
-			t[i].count = i;
-			pthread_create(&tid[i], NULL, threader, &t[i]);
-		}
-		i = -1;
-		while(++i < size)
-		{
-			pthread_join(tid[i], NULL);
-		}
-		mlx_put_image_to_window(visual->mlx, visual->win, visual->img, 0, 0);
-	}
+	if (visual->init == 1)
+		visualizer(game, map, visual);
 }

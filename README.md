@@ -30,3 +30,8 @@ Incomplete:
 In Progress: Piece placing algorithm behavior
 Note - Completed the visualizer I started when I was up super late because I couldn't fall asleep. Fixed the visualizer to look nice, now aiming to work on behavior. May optimize the visualizer for faster speed.
 
+Day 5 progress (about 3 hours)
+Completed: Parsing filler_vm stdin, placing pieces of board, identifying pieces, visualizer, filling board algorithm
+Incomplete:
+In Progress: Piece placing algorithm behavior
+Note - Had a big break on this project and some other due to birthday vacation and prepping for holiday season. I've also started up lem_in with my good friend Aneesh (https://github.com/aneeshnazar/lemin) so I will be trying to finish this project up when I have time while working on lem_in with Aneesh.

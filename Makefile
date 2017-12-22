@@ -14,7 +14,8 @@
 
 NAME	= mlu.filler
 
-SRC		= main.c parse_stdin.c scan_board.c visual.c
+SRC		= main.c parse_stdin.c fill_board.c visual.c \
+			place_bottom.c place_top.c pthread.c
 OBJ 	= $(addprefix ./objects/, $(SRC:.c=.o))
 CFLAG	= -Wall -Wextra -Werror -g
 LFLAG	= -L minilibx ./libft/libft.a -lmlx

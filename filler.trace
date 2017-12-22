@@ -1,5 +1,6 @@
-seed = 5082
+seed = 9136
+O: error on input
 X: error on input
-./resources/players/carli.filler won
+./mlu.filler won
 Score:
-91AGAINST90
+25AGAINST25

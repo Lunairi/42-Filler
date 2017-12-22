@@ -56,8 +56,6 @@ typedef struct	s_coords
 {
 	int			row;
 	int			col;
-	int			p_row;
-	int			p_col;
 	int			x;
 	int			y;
 	int			valid;
@@ -92,6 +90,10 @@ typedef struct	s_vcord
 	int			x1;
 	int			y0;
 	int			y1;
+	int			x;
+	int			y;
+	char		p;
+	int			color;
 }				t_vcord;
 
 typedef struct	s_thread
@@ -112,13 +114,33 @@ void			parse_piece_size(t_filler *game, int t, char *string);
 void			parse_piece_detail(t_filler *game, char *string);
 
 /*
-** scan_board.c
+** fill_board.c
 */
 int				check_spot(t_filler *game, t_coords *map);
 
 /*
 ** visual.c
 */
-void			initialize_visualizer(t_filler *game, t_coords *map, t_visual *visual, int size);
+void			visualizer(t_filler *game, t_coords *map, t_visual *visual);
+void			init_map(t_filler *game, t_coords *map, t_visual *visual);
+int				color_value(t_visual *visual, t_vcord pt);
+void			color_piece(t_filler *game, t_coords *map,
+					t_visual *visual, t_vcord pt);
+
+/*
+** pthread.c
+*/
+void			initialize_visualizer(t_filler *game,
+					t_coords *map, t_visual *visual);
+
+/*
+** place_bottom.c
+*/
+int				fill_bottom(t_filler *game, t_coords *map);
+
+/*
+** place_top.c
+*/
+int				fill_top(t_filler *game, t_coords *map);
 
 #endif

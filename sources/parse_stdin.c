@@ -20,7 +20,6 @@ void	parse_player_number(t_filler *game, int t, char *string)
 		game->player_number = 'o';
 	else
 		game->player_number = 'x';
-	// fprintf(stderr, "PLAYER NUMBER [%c]\n", game->player_number);
 }
 
 void	parse_map_size(t_filler *game, int t, char *string)
@@ -33,7 +32,6 @@ void	parse_map_size(t_filler *game, int t, char *string)
 		game->map_row = game->map_row * 10 + (string[t] - '0');
 	while (string[++t] != ':')
 		game->map_col = game->map_col * 10 + (string[t] - '0');
-	// fprintf(stderr, "MAP ROW[%i] COL[%i]\n", game->map_row, game->map_col);
 	game->map = ft_memalloc(sizeof(char*) * (game->map_row));
 	game->track = 1;
 	game->i = 0;
@@ -44,7 +42,6 @@ void	parse_map_detail(t_filler *game, char *tmp, char *string)
 	tmp = string;
 	tmp += 4;
 	game->map[game->i] = tmp;
-	// fprintf(stderr, "MAP [%i] [%s]\n", game->i, game->map[game->i]);
 	game->i++;
 }
 
@@ -59,7 +56,6 @@ void	parse_piece_size(t_filler *game, int t, char *string)
 		game->piece_row = game->piece_row * 10 + (string[t] - '0');
 	while (string[++t] != ':')
 		game->piece_col = game->piece_col * 10 + (string[t] - '0');
-	// fprintf(stderr, "PIECE ROW[%i] COL[%i]\n", game->piece_row, game->piece_col);
 	game->piece = ft_memalloc(sizeof(char*) * (game->piece_row));
 	game->track = 2;
 }
@@ -67,7 +63,6 @@ void	parse_piece_size(t_filler *game, int t, char *string)
 void	parse_piece_detail(t_filler *game, char *string)
 {
 	game->piece[game->j] = string;
-	// fprintf(stderr, "PIECE [%i] [%s]\n", game->j, game->piece[game->j]);
 	game->j++;
 	game->parse_loop++;
 	if (game->parse_loop == game->piece_row)
