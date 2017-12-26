@@ -63,6 +63,8 @@ typedef struct	s_coords
 	int			j;
 	int			k;
 	int			place;
+	int			current;
+	int			behave;
 }				t_coords;
 
 typedef struct	s_visual
@@ -132,6 +134,26 @@ void			color_piece(t_filler *game, t_coords *map,
 */
 void			initialize_visualizer(t_filler *game,
 					t_coords *map, t_visual *visual);
+
+/*
+** behavior.c
+*/
+int				behavior(t_filler *game, t_coords *map);
+
+/*
+** fill_board.c
+*/
+int				fill_board(t_filler *game, t_coords *map);
+
+/*
+** cut_player.c
+*/
+int				cut_player(t_filler *game, t_coords *map);
+
+/*
+** utility.c
+*/
+void			place_piece(t_filler *game, t_coords *map);
 
 /*
 ** place_bottom.c

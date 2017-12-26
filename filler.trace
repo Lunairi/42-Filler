@@ -1,6 +1,4 @@
-seed = 9136
-O: error on input
-X: error on input
+seed = 4348
 ./mlu.filler won
 Score:
-25AGAINST25
+70AGAINST102

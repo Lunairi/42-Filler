@@ -42,6 +42,7 @@ int		main(void)
 	visual = ft_memalloc(sizeof(t_visual));
 	map = ft_memalloc(sizeof(t_coords));
 	game = ft_memalloc(sizeof(t_filler));
+	map->behave = 0;
 	while (game->track != 5 && get_next_line(0, &string))
 		hub(game, map, visual, string);
 	free(string);

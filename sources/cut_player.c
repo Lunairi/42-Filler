@@ -14,24 +14,32 @@
 
 static void	reset_coords(t_filler *game, t_coords *map)
 {
-	map->row = 0;
-	map->col = game->col - 1;
-	map->j = 0;
-	map->k = -1;
+	map->row = map->current;
+	map->col = game->map_col - 1;
+	map->j = game->piece_row - 1;
+	map->k = game->piece_col - 1;
 	map->valid = 0;
 }
 
-void	find_spot_last(t_filler *game, t_coords *map)
+static void	find_spot_last(t_filler *game, t_coords *map)
 {
 	int z;
 
 	z = 0;
+	map->k--;
+	if (map->k < 0)
+	{
+		map->k = game->piece_col - 1;
+		map->j--;
+	}
+	if (map->j < 0)
+		z = 1;
 	while (z == 0)
 	{
 		if (game->piece[map->j][map->k] == '.')
 		{
 			map->k--;
-			if (map->k >= game->piece_col)
+			if (map->k < 0)
 			{
 				map->k = game->piece_col - 1;
 				map->j--;
@@ -44,31 +52,59 @@ void	find_spot_last(t_filler *game, t_coords *map)
 	}
 }
 
-
-int		check_spot(t_filler *game, t_coords *map)
+static void	check_piece(t_filler *game, t_coords *map)
 {
+	// if (game->track != 4)
+	// 	map->valid = fill_top(game, map);
+	// else if (game->track == 4)
+	// {
+		while ((map->j >= 0) && map->valid != 1)
+		{
+			find_spot_last(game, map);
+		if (map->j >= 0)
+			map->valid = fill_bottom(game, map);
+		}
+	// }
+	if (map->valid == 1)
+		place_piece(game, map);
+	else
+		map->valid = 0;
+}
+
+
+
+int		cut_player(t_filler *game, t_coords *map)
+{
+	static int i;
+
+	i = 0;
 	reset_coords(game, map);
-	find_spot_last(game, map);
+	// find_spot_last(game, map);
 	while (map->valid == 0)
 	{
 		if (game->map[map->row][map->col] == ft_toupper(game->player_number))
 		{
-			if (game->track == 4)
+			if (i == 0)
 			{
-				map->j = 0;
-				map->k = -1;
+				i++;
+				map->current = map->row;
 			}
+			// if (game->track == 4)
+			// {
+				map->j = game->piece_row - 1;
+				map->k = game->piece_col - 1;
+			// }
 			check_piece(game, map);
 		}
-		if (--map->col < 0)
+		if (--map->col < (game->map_col * (1/2)))
 		{
-			map->col = game->col - 1;
+			map->col = game->map_col - 1;
 			map->row++;
 		}
 		if ((map->row >= game->map_row) && game->track == 4)
 		{
-			game->track = 5;
-			ft_printf("0 0\n");
+			game->track = 3;
+			map->behave = 1;
 			return (0);
 		}
 		if ((map->row >= game->map_row) && game->track == 3)

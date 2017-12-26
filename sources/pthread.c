@@ -20,7 +20,7 @@ static void	*threader(void *t)
 	if (image->count == 0)
 		visualizer(image->game, image->map, image->visual);
 	else
-		check_spot(image->game, image->map);
+		behavior(image->game, image->map);
 	return ((void*)image);
 }
 

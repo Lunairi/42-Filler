@@ -1,1 +1,1 @@
-./resources/filler_vm -f ./resources/maps/map02 -p2 ./mlu.filler -p1 ./resources/players/superjeannot.filler
+./resources/filler_vm -f ./resources/maps/map02 -p2 ./mlu.filler -p1 ./resources/players/superjeannot.filler -q

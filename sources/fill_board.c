@@ -21,7 +21,7 @@ static void	reset_coords(t_filler *game, t_coords *map)
 	map->valid = 0;
 }
 
-void	truncate_spots(t_filler *game, t_coords *map)
+static void	truncate_spots(t_filler *game, t_coords *map)
 {
 	int z;
 
@@ -52,14 +52,7 @@ void	truncate_spots(t_filler *game, t_coords *map)
 	}
 }
 
-void	place_piece(t_filler *game, t_coords *map)
-{
-	game->track = 3;
-	ft_printf("%i %i\n", (map->row - map->j), (map->col - map->k));
-	game->track = 0;
-}
-
-void	check_piece(t_filler *game, t_coords *map)
+static void	check_piece(t_filler *game, t_coords *map)
 {
 	if (game->track != 4)
 		map->valid = fill_bottom(game, map);
@@ -78,7 +71,7 @@ void	check_piece(t_filler *game, t_coords *map)
 		map->valid = 0;
 }
 
-int		check_spot(t_filler *game, t_coords *map)
+int		fill_board(t_filler *game, t_coords *map)
 {
 	reset_coords(game, map);
 	truncate_spots(game, map);
