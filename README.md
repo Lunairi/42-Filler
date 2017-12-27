@@ -26,21 +26,27 @@ Day 4 progress (about 2 hours)
 - In Progress: Piece placing algorithm behavior
 - Note - Completed the visualizer I started when I was up super late because I couldn't fall asleep. Fixed the visualizer to look nice, now aiming to work on behavior. May optimize the visualizer for faster speed.
 
-Day 5 progress (about 3 hours)
+Day 5 progress (about 5 hours)
+- Completed: Parsing filler_vm stdin, placing pieces of board, identifying pieces, visualizer, filling board algorithm
+- Incomplete:
+- In Progress: Piece placing algorithm behavior
+- Note - Will be taking a break soon to focus on holiday stuff and bday event. Going to Seattle and will be busy with doing multiple projects at one time. Mostly worked on trying to test out and fix out some behavioral thing, seeing whart part of my code I wanted to optimize and fix.
+
+(PROJECT WENT ON BREAK FOR AWHILE)
+
+Day 6 progress (about 3 hours)
 - Completed: Parsing filler_vm stdin, placing pieces of board, identifying pieces, visualizer, filling board algorithm
 - Incomplete:
 - In Progress: Piece placing algorithm behavior
 - Note - Had a big break on this project and some other due to birthday vacation and prepping for holiday season. I've also started up lem_in with my good friend Aneesh (https://github.com/aneeshnazar/lemin) so I will be trying to finish this project up when I have time while working on lem_in with Aneesh.
 
-(PROJECT WENT ON BREAK FOR AWHILE)
-
-Day 6 progress (about 6 hours)
+Day 7 progress (about 6 hours)
 - Completed: Parsing filler_vm stdin, placing pieces of board, identifying pieces, visualizer, filling board algorithm
 - Incomplete:
 - In Progress: Piece placing algorithm behavior
 - Note - Had to fix a few visualizer issue and algorithm behavior, becoming more polished and faster. Trying to create behavioral patterns to win as much as possible, changing a few algorithm as well.
 
-Day 7 progress (about 10 hours)
+Day 8 progress (about 10 hours)
 - Completed: Parsing filler_vm stdin, placing pieces of board, identifying pieces, visualizer, filling board algorithm, piece placing algorithm behavior
 - Incomplete:
 - In Progress:
