@@ -1,0 +1,5 @@
+./resources/filler_vm -f ./resources/maps/map00 -p2 ./mlu.filler -p1 ./resources/players/superjeannot.filler -q
+./resources/filler_vm -f ./resources/maps/map00 -p2 ./mlu.filler -p1 ./resources/players/hcao.filler -q
+./resources/filler_vm -f ./resources/maps/map00 -p2 ./mlu.filler -p1 ./resources/players/abanlin.filler -q
+./resources/filler_vm -f ./resources/maps/map00 -p2 ./mlu.filler -p1 ./resources/players/carli.filler -q
+./resources/filler_vm -f ./resources/maps/map00 -p2 ./mlu.filler -p1 ./resources/players/grati.filler -q

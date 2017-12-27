@@ -14,7 +14,8 @@
 
 static void	reset_coords(t_filler *game, t_coords *map)
 {
-	map->row = map->current;
+	// map->row = map->current;
+	map->row = 0;
 	map->col = game->map_col - 1;
 	map->j = game->piece_row - 1;
 	map->k = game->piece_col - 1;

@@ -17,7 +17,6 @@ NAME	= mlu.filler
 SRC		= main.c parse_stdin.c fill_board.c visual.c \
 			place_bottom.c place_top.c pthread.c behavior.c \
 			utility.c cut_player.c
-CHK		=	./checker/filler_checker.c
 OBJ 	= $(addprefix ./objects/, $(SRC:.c=.o))
 CFLAG	= -Wall -Wextra -Werror -g
 LFLAG	= -L minilibx ./libft/libft.a -lmlx
@@ -31,7 +30,6 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	make -C libft/
 	gcc $(CFLAG) $(LFLAG) $(FFLAG) -L minilibx -lmlx -L libft -lft -I libft -I includes $^ -o $(NAME)
-	gcc $(CFLAG) $(LFLAG) $(FFLAG) -L minilibx -lmlx -L libft -lft -I libft -I includes $(CHK) -o checker
 	printf '\033[32m[ ✔ ] %s\n\033[0m' "Created filler player"
 
 ./objects/%.o: ./sources/%.c

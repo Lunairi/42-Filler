@@ -1,4 +1,5 @@
-seed = 4348
-./mlu.filler won
+seed = 3012
+O: error on input
+./resources/players/grati.filler won
 Score:
-70AGAINST102
+11AGAINST11
