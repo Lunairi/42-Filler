@@ -49,6 +49,6 @@ int		main(void)
 	free(map);
 	free(game);
 	free(visual);
-	// sleep(5);
+	sleep(3);
 	return (0);
 }

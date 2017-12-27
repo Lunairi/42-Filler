@@ -154,6 +154,10 @@ int				cut_player(t_filler *game, t_coords *map);
 ** utility.c
 */
 void			place_piece(t_filler *game, t_coords *map);
+void			check_cut(t_coords *map, t_filler *game);
+void			check_fill(t_coords *map, t_filler *game);
+int				control_cut(t_filler *game, t_coords *map);
+int				control_fill(t_filler *game, t_coords *map);
 
 /*
 ** place_bottom.c

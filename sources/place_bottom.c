@@ -51,7 +51,6 @@ int			fill_bottom(t_filler *game, t_coords *map)
 	{
 		if (game->piece[map->x][map->y] == '*')
 		{
-			// fprintf(stderr, "MAP SPOT %i\n", map->row + map->x - map->first);
 			if (((map->row + map->x - map->j) < game->map_row) &&
 				((map->row + map->x - map->j) >= 0))
 			{

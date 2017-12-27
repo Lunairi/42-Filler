@@ -27,23 +27,15 @@ static void	truncate_spots(t_filler *game, t_coords *map)
 
 	z = 0;
 	map->k++;
-	if (map->k >= game->piece_col)
-	{
-		map->k = 0;
-		map->j++;
-	}
+	check_fill(map, game);
 	if (map->j >= game->piece_row)
-			z = 1;
+		z = 1;
 	while (z == 0)
 	{
 		if (game->piece[map->j][map->k] == '.')
 		{
 			map->k++;
-			if (map->k >= game->piece_col)
-			{
-				map->k = 0;
-				map->j++;
-			}
+			check_fill(map, game);
 		}
 		else
 			z = 1;
@@ -61,8 +53,8 @@ static void	check_piece(t_filler *game, t_coords *map)
 		while ((map->j < game->piece_row) && map->valid != 1)
 		{
 			truncate_spots(game, map);
-		if (map->j < game->piece_row)
-			map->valid = fill_bottom(game, map);
+			if (map->j < game->piece_row)
+				map->valid = fill_bottom(game, map);
 		}
 	}
 	if (map->valid == 1)
@@ -71,7 +63,7 @@ static void	check_piece(t_filler *game, t_coords *map)
 		map->valid = 0;
 }
 
-int		fill_board(t_filler *game, t_coords *map)
+int			fill_board(t_filler *game, t_coords *map)
 {
 	reset_coords(game, map);
 	truncate_spots(game, map);
@@ -86,17 +78,8 @@ int		fill_board(t_filler *game, t_coords *map)
 			}
 			check_piece(game, map);
 		}
-		if (++map->col >= game->map_col)
-		{
-			map->col = 0;
-			map->row++;
-		}
-		if ((map->row >= game->map_row) && game->track == 4)
-		{
-			game->track = 5;
-			ft_printf("0 0\n");
+		if (!control_fill(game, map))
 			return (0);
-		}
 		if ((map->row >= game->map_row) && game->track == 3)
 		{
 			reset_coords(game, map);

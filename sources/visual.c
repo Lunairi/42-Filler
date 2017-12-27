@@ -12,7 +12,7 @@
 
 #include "filler.h"
 
-int		color_value(t_visual *visual, t_vcord pt)
+int			color_value(t_visual *visual, t_vcord pt)
 {
 	if (visual->pix[pt.y0 + (pt.x0 * visual->s_line / 4)] != 0x303030
 			&& pt.p == 'O')
@@ -23,7 +23,7 @@ int		color_value(t_visual *visual, t_vcord pt)
 	return (0xFFFFFF);
 }
 
-void	color_piece(t_filler *game, t_coords *map,
+void		color_piece(t_filler *game, t_coords *map,
 				t_visual *visual, t_vcord pt)
 {
 	pt.x0 = pt.x * visual->x_size + visual->border + visual->x_offset;
